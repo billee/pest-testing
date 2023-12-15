@@ -1,2 +1,10 @@
 https://www.youtube.com/watch?v=EZl0qo9J3VA
 C:\xampp\htdocs\sites\Pest-testing
+
+composer require pestphp/pest --dev --with-all-dependencies
+./vendor/bin/pest --init
+
+change TestCase to ApiTestCase
+to run: ./vendor/bin/pest
+
+uses(Tests\ApiTestCase::class)->in('Feature'); // change in pest.php
