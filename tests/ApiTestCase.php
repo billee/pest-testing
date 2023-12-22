@@ -2,24 +2,41 @@
 
 namespace Tests;
 
+use App\Http\Kernel;
+use App\Http\Request;
+use App\Http\Response;
 use PHPUnit\Framework\TestCase as BaseTestCase;
-
 
 abstract class ApiTestCase extends BaseTestCase
 {
-    public function json(string $method = 'GET', string $uri ="/", array $data =[], array $headers=[]): object
+    public function json(
+        string $method = 'GET', 
+        string $uri ="/", 
+        array $data =[], 
+        array $headers=[]
+    ): Response
     {
-        return new class{
-            public function getStatus():int 
-            {
-                return 200;
-            }
+        $content = json_encode($data);
+        $server = array_merge([
+            'CONTENT_TYPE' => 'application/json',
+            'Accept' => 'application/json',
+        ], $headers);
 
-            public function getBody():string
-            {
-                return '{"id":1,"title":"Clean Code: A Handbook of Agile Software Craftsmanship","year_published":2008,"author":{"id":1,"name":"Robert C. Martin","bio":"This is an author"}}';
-            }
-        };
+        $request = Request::create(
+            method: $method,
+            uri: $uri,
+            server: $server,
+            content: $content
+
+        );
+
+        $kernel = new Kernel();
+        $response = $kernel->handle($request);
+
+        return $response;
+
+
+
     }
 
 

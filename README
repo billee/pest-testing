@@ -8,3 +8,5 @@ change TestCase to ApiTestCase
 to run: ./vendor/bin/pest
 
 uses(Tests\ApiTestCase::class)->in('Feature'); // change in pest.php
+
+composer require --dev symfony/var-dumper
