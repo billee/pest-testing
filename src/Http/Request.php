@@ -23,17 +23,17 @@ class Request{
     ): self
     {
         $uriParts = parse_url($uri);
-        //dd($uriParts);
+        // dump($uriParts);
 
         parse_str($uriParts['query'] ?? '', $queryParams);
-        //dd($queryParams);
+        // dump($uriParts['query']);
+        // dump($queryParams);
 
         $_SERVER['REQUEST_URI']= $uri;
         $_SERVER['REQUEST_METHOD']= $method;
 
-
         $serverVars = array_merge($server, $_SERVER);
-
+        // dd($serverVars );
         return new self($queryParams, $serverVars);
     }
 

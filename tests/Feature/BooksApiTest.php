@@ -6,6 +6,8 @@ it('retrieves the correct data from the books API', function(){
 
     //ACT
         $response = $this->json('GET', '/books/1');
+        //dd($response);
+        // dump($this->bbb('ccc'));
 
     //ASSERT
     expect($response->getStatusCode())->toBeInt()->toBe(200)

@@ -9,6 +9,10 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 
 abstract class ApiTestCase extends BaseTestCase
 {
+    // public function bbb(string $d){
+    //     return "ret ". $d;
+    // }
+
     public function json(
         string $method = 'GET', 
         string $uri ="/", 
@@ -17,21 +21,24 @@ abstract class ApiTestCase extends BaseTestCase
     ): Response
     {
         $content = json_encode($data);
+        //dump($content);
         $server = array_merge([
             'CONTENT_TYPE' => 'application/json',
             'Accept' => 'application/json',
         ], $headers);
 
-        $request = Request::create(
-            method: $method,
-            uri: $uri,
-            server: $server,
-            content: $content
+        //dump($server);
 
-        );
+        // $request = Request::create(
+        //     method: $method,
+        //     uri: $uri,
+        //     server: $server,
+        //     content: $content
+        // );
 
         $kernel = new Kernel();
-        $response = $kernel->handle($request);
+        //$response = $kernel->handle($request);
+        $response = $kernel->handle();
 
         return $response;
 
